@@ -18,12 +18,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import tees.ac.uk.w9636412.movieapp.R
 import tees.ac.uk.w9636412.movieapp.app.MovieAppRouter
 import tees.ac.uk.w9636412.movieapp.app.MovieAppScreen
-import tees.ac.uk.w9636412.movieapp.app.components.ButtonComponent
-import tees.ac.uk.w9636412.movieapp.app.components.ClickableLoginTextComponent
-import tees.ac.uk.w9636412.movieapp.app.components.DividerTextComponent
-import tees.ac.uk.w9636412.movieapp.app.components.HeadingTextComponent
-import tees.ac.uk.w9636412.movieapp.app.components.PasswordTextFieldComponent
-import tees.ac.uk.w9636412.movieapp.app.components.TextFieldComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.ButtonComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.ClickTextComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.DividerTextComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.HeadingTextComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.PasswordTextFieldComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.TextFieldComponent
 import tees.ac.uk.w9636412.movieapp.model.LoginEventTrigger
 import tees.ac.uk.w9636412.movieapp.model.LoginViewModel
 
@@ -72,7 +72,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = viewModel()) {
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 DividerTextComponent()
-                ClickableLoginTextComponent(tryingToLogin = false, onTextSelected = {
+                ClickTextComponent(tryingToLogin = false, onTextSelected = {
                     MovieAppRouter.navigateTo(MovieAppScreen.RegisterScreen)
                 })
             }

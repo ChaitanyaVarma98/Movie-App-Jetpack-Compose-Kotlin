@@ -1,4 +1,4 @@
-package tees.ac.uk.w9636412.movieapp.app.components
+package tees.ac.uk.w9636412.movieapp.app.Common
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -8,11 +8,6 @@ import androidx.compose.foundation.text.*
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.*
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Logout
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
@@ -30,14 +25,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.*
 import tees.ac.uk.w9636412.movieapp.R
-import tees.ac.uk.w9636412.movieapp.ui.theme.BgColor
 import tees.ac.uk.w9636412.movieapp.ui.theme.GrayColor
 import tees.ac.uk.w9636412.movieapp.ui.theme.Primary
-import tees.ac.uk.w9636412.movieapp.ui.theme.Secondary
 import tees.ac.uk.w9636412.movieapp.utils.ClipShape
 
 @Composable
@@ -246,19 +238,14 @@ fun DividerTextComponent() {
 }
 
 @Composable
-fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (String) -> Unit) {
-    val initialText =
-        if (tryingToLogin) "Already have an account? " else "Don’t have an account yet? "
-    val loginText = if (tryingToLogin) "Login" else "Register"
-
+fun ClickTextComponent(tryingToLogin: Boolean = true, onTextSelected: (String) -> Unit) {
+    val msg = if (tryingToLogin) "Login" else "Register"
     val annotatedString = buildAnnotatedString {
-        append(initialText)
         withStyle(style = SpanStyle(color = Primary)) {
-            pushStringAnnotation(tag = loginText, annotation = loginText)
-            append(loginText)
+            pushStringAnnotation(tag = msg, annotation = msg)
+            append(msg)
         }
     }
-
     ClickableText(
         modifier = Modifier
             .fillMaxWidth()
@@ -271,58 +258,14 @@ fun ClickableLoginTextComponent(tryingToLogin: Boolean = true, onTextSelected: (
         ),
         text = annotatedString,
         onClick = { offset ->
-
             annotatedString.getStringAnnotations(offset, offset)
                 .firstOrNull()?.also { span ->
-                    Log.d("ClickableTextComponent", "{${span.item}}")
-
-                    if (span.item == loginText) {
+                    if (span.item == msg) {
                         onTextSelected(span.item)
                     }
                 }
-
         },
     )
 }
 
-@Composable
-fun UnderLinedTextComponent(value: String) {
-    Text(
-        text = value,
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(min = 40.dp),
-        style = TextStyle(
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Normal,
-            fontStyle = FontStyle.Normal
-        ), color = colorResource(id = R.color.black),
-        textAlign = TextAlign.Center,
-        textDecoration = TextDecoration.Underline
-    )
 
-}
-
-@Composable
-fun AppToolbar(
-    toolbarTitle: String, logoutButtonClicked: () -> Unit
-) {
-    TopAppBar(
-        backgroundColor = Color.LightGray,
-        title = {
-            Text(
-                text = toolbarTitle, color = Color.Black
-            )
-        },
-        actions = {
-            IconButton(onClick = {
-                logoutButtonClicked.invoke()
-            }) {
-                Icon(
-                    imageVector = Icons.Filled.Logout,
-                    contentDescription = "Logout",
-                )
-            }
-        }
-    )
-}

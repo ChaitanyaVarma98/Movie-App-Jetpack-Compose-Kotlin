@@ -20,11 +20,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import tees.ac.uk.w9636412.movieapp.R
 import tees.ac.uk.w9636412.movieapp.app.MovieAppRouter
 import tees.ac.uk.w9636412.movieapp.app.MovieAppScreen
-import tees.ac.uk.w9636412.movieapp.app.components.ButtonComponent
-import tees.ac.uk.w9636412.movieapp.app.components.ClickableLoginTextComponent
-import tees.ac.uk.w9636412.movieapp.app.components.HeadingTextComponent
-import tees.ac.uk.w9636412.movieapp.app.components.PasswordTextFieldComponent
-import tees.ac.uk.w9636412.movieapp.app.components.TextFieldComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.ButtonComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.ClickTextComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.HeadingTextComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.PasswordTextFieldComponent
+import tees.ac.uk.w9636412.movieapp.app.Common.TextFieldComponent
 import tees.ac.uk.w9636412.movieapp.model.RegisterTrigger
 import tees.ac.uk.w9636412.movieapp.model.RegisterViewModel
 
@@ -83,7 +83,7 @@ fun RegisterScreen(registrationViewModel: RegisterViewModel = viewModel()) {
                     },
                 )
                 Spacer(modifier = Modifier.height(20.dp))
-                ClickableLoginTextComponent(tryingToLogin = true, onTextSelected = {
+                ClickTextComponent(tryingToLogin = true, onTextSelected = {
                     MovieAppRouter.navigateTo(MovieAppScreen.LoginScreen)
                 })
             }
