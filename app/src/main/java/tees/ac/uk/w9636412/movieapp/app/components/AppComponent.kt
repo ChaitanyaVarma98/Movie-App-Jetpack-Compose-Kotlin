@@ -90,12 +90,6 @@ fun TextFieldComponent(
             .fillMaxWidth()
             .clip(ClipShape.small),
         label = { Text(text = labelValue) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Primary,
-            focusedLabelColor = Primary,
-            cursorColor = Primary,
-            backgroundColor = BgColor
-        ),
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
         singleLine = true,
         maxLines = 1,
@@ -106,8 +100,7 @@ fun TextFieldComponent(
         },
         leadingIcon = {
             Icon(painter = painterResource, contentDescription = "")
-        },
-        isError = !errorStatus
+        }
     )
 }
 
@@ -132,12 +125,6 @@ fun PasswordTextFieldComponent(
             .fillMaxWidth()
             .clip(ClipShape.small),
         label = { Text(text = labelValue) },
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Primary,
-            focusedLabelColor = Primary,
-            cursorColor = Primary,
-            backgroundColor = BgColor
-        ),
         keyboardOptions = KeyboardOptions(
             keyboardType = KeyboardType.Password,
             imeAction = ImeAction.Done
@@ -155,56 +142,8 @@ fun PasswordTextFieldComponent(
         leadingIcon = {
             Icon(painter = painterResource, contentDescription = "")
         },
-        trailingIcon = {
-
-            val iconImage = if (passwordVisible.value) {
-                Icons.Filled.Visibility
-            } else {
-                Icons.Filled.VisibilityOff
-            }
-
-            val description = if (passwordVisible.value)
-            {"Hide password" }
-            else
-            {"Show password"}
-
-            IconButton(onClick = { passwordVisible.value = !passwordVisible.value }) {
-                Icon(imageVector = iconImage, contentDescription = description)
-            }
-
-        },
-        visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation(),
-        isError = !errorStatus
+        visualTransformation = if (passwordVisible.value) VisualTransformation.None else PasswordVisualTransformation()
     )
-}
-
-
-
-@Composable
-fun CheckboxComponent(
-    value: String,
-    onTextSelected: (String) -> Unit,
-    onCheckedChange: (Boolean) -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .heightIn(56.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-
-        val checkedState = remember {
-            mutableStateOf(false)
-        }
-
-        Checkbox(checked = checkedState.value,
-            onCheckedChange = {
-                checkedState.value = !checkedState.value
-                onCheckedChange.invoke(it)
-            })
-
-        ClickableTextComponent(value = value, onTextSelected)
-    }
 }
 
 @Composable
@@ -250,16 +189,15 @@ fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boole
             onButtonClicked.invoke()
         },
         contentPadding = PaddingValues(),
-        colors = ButtonDefaults.buttonColors(Color.Transparent),
-        shape = RoundedCornerShape(50.dp),
-        enabled = isEnabled
+        colors = ButtonDefaults.buttonColors(Color.DarkGray),
+        shape = RoundedCornerShape(40.dp)
     ) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .heightIn(48.dp)
                 .background(
-                    brush = Brush.horizontalGradient(listOf(Secondary, Primary)),
+                    brush = Brush.horizontalGradient(listOf(GrayColor,GrayColor)),
                     shape = RoundedCornerShape(50.dp)
                 ),
             contentAlignment = Alignment.Center
@@ -270,9 +208,7 @@ fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boole
                 color = Color.White,
                 fontWeight = FontWeight.Bold
             )
-
         }
-
     }
 }
 
@@ -369,12 +305,10 @@ fun UnderLinedTextComponent(value: String) {
 
 @Composable
 fun AppToolbar(
-    toolbarTitle: String, logoutButtonClicked: () -> Unit,
-    navigationIconClicked: () -> Unit
+    toolbarTitle: String, logoutButtonClicked: () -> Unit
 ) {
-
     TopAppBar(
-        backgroundColor = Primary,
+        backgroundColor = Color.LightGray,
         title = {
             Text(
                 text = toolbarTitle, color = Color.Black

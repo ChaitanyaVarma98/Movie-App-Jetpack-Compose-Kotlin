@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "832533800650",
+    "project_id": "movieapp-c2c59",
+    "storage_bucket": "movieapp-c2c59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832533800650:android:4e1c69003c20c96e55b633",
+        "android_client_info": {
+          "package_name": "tees.ac.uk.w9636412.movieapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyOrm4kngoKz106BwfplIPwqdo1x3xBHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
