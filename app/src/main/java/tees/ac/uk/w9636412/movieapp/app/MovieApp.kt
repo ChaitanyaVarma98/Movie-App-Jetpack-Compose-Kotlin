@@ -16,11 +16,6 @@ fun MovieApp() {
         modifier = Modifier.fillMaxSize(),
         color = Color.White
     ) {
-
-//        if (homeViewModel.isUserLoggedIn.value == true) {
-//            NewsAppRouter.navigateTo(NewsAppScreen.HomeScreen)
-//        }
-
         Crossfade(targetState = MovieAppRouter.current) { current ->
             when (current.value) {
                 is MovieAppScreen.RegisterScreen -> {
