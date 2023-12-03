@@ -2,9 +2,8 @@ package tees.ac.uk.w9636412.movieapp.app.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,6 +26,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,19 +35,28 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import tees.ac.uk.w9636412.movieapp.R
-import tees.ac.uk.w9636412.movieapp.data.Movies
+import tees.ac.uk.w9636412.movieapp.app.Common.ApiService
+import tees.ac.uk.w9636412.movieapp.app.MovieAppRouter
+import tees.ac.uk.w9636412.movieapp.app.MovieAppScreen
+import tees.ac.uk.w9636412.movieapp.data.Results
 import tees.ac.uk.w9636412.movieapp.model.MovieScreenViewModel
-import tees.ac.uk.w9636412.movieapp.retrofit.ApiService
 
 @Composable
 fun MovieScreen(movieScreenViewModel: MovieScreenViewModel = viewModel()) {
 
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        movieScreenViewModel.getMovies()
+    }
+
+
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -61,8 +70,13 @@ fun MovieScreen(movieScreenViewModel: MovieScreenViewModel = viewModel()) {
         ) {
             Column(modifier = Modifier.fillMaxSize())
             {
-                MoviesList(movieScreenViewModel.moviesList.value, onClickView ={}
-                )
+                LazyColumn{
+                    items(movieScreenViewModel.newsList.value){movie ->
+                        MovieList(movie){
+                            movieScreenViewModel.setMovie(movie)
+                        }
+                    }
+                }
             }
         }
     }
@@ -94,29 +108,9 @@ fun MovieAppToolBar(
 }
 
 
-
-@Composable
-fun MoviesList(
-    movieList: Movies,
-    onClickView : () -> Unit
-){
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        contentPadding = PaddingValues(16.dp)
-    ) {
-        items(movieList){movie ->
-            MovieCardList(
-                results = movie,
-                onClickView = onClickView
-            )
-        }
-    }
-}
-
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MovieCardList(results: Movies.Results, onClickView: () -> Unit) {
+fun MovieList(results: Results,onGettingClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(horizontal = 8.dp, vertical = 8.dp)
@@ -124,7 +118,7 @@ fun MovieCardList(results: Movies.Results, onClickView: () -> Unit) {
         elevation = 2.dp,
         backgroundColor = Color.White,
         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
-        onClick = { onClickView() }
+        onClick = { onGettingClick()},
 
     ) {
         Row {
@@ -148,10 +142,9 @@ fun MovieCardList(results: Movies.Results, onClickView: () -> Unit) {
                     .fillMaxWidth()
                     .align(Alignment.CenterVertically)
             ) {
-            }
-                Text(text = "results.original_title!!", style = typography.h6, textAlign = TextAlign.Center)
-                Text(text = "results.overview!!", style = typography.caption, textAlign = TextAlign.Center)
-
+                Text(text = results.original_title!!, style = typography.h6, textAlign = TextAlign.Center)
+                Text(text = results.overview!!, style = typography.caption, textAlign = TextAlign.Center)
             }
         }
     }
+}

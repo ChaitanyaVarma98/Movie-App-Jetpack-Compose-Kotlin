@@ -7,6 +7,7 @@ sealed  class MovieAppScreen {
     object RegisterScreen : MovieAppScreen()
     object LoginScreen : MovieAppScreen()
     object MovieScreen : MovieAppScreen()
+    object MovieDetailScreen : MovieAppScreen()
 }
 
 object MovieAppRouter {

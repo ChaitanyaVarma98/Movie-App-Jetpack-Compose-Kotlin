@@ -1,4 +1,4 @@
-package tees.ac.uk.w9636412.movieapp.retrofit
+package tees.ac.uk.w9636412.movieapp.app.Common
 
 import retrofit2.Response
 import retrofit2.http.GET
@@ -12,5 +12,5 @@ interface ApiService {
     }
 
     @GET("3/discover/movie?api_key=c9856d0cb57c3f14bf75bdc6c063b8f3")
-    suspend fun getMoviesList(): Response<Movies>
+    suspend fun getMoviesList(): Movies
 }

@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import tees.ac.uk.w9636412.movieapp.app.ui.LoginScreen
+import tees.ac.uk.w9636412.movieapp.app.ui.MovieDetailScreen
 import tees.ac.uk.w9636412.movieapp.app.ui.MovieScreen
 import tees.ac.uk.w9636412.movieapp.app.ui.RegisterScreen
 
@@ -29,6 +30,11 @@ fun MovieApp() {
                 is MovieAppScreen.MovieScreen -> {
                     MovieScreen()
                 }
+                is MovieAppScreen.MovieDetailScreen -> {
+                    MovieDetailScreen()
+                }
+
+                else -> {}
             }
         }
     }
