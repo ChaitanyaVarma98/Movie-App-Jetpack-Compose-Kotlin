@@ -13,10 +13,10 @@ class MovieRepositoryImp(
         Log.d(TAG, "Repo Implementation - " + response.total_results)
         if (response.results.isNotEmpty()) {
             Log.d(TAG, "Repo Implementation - pass " + response.total_results)
-            return ResultStatus.Success(response)
+            return ResultStatus.Response(response)
         } else {
             Log.d(TAG, "Repo Implementation - failed " + response.total_results)
-            return ResultStatus.Error("Failed")
+            return ResultStatus.Message("Failed")
         }
     }
 }

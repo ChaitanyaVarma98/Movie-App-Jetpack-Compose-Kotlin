@@ -34,7 +34,7 @@ fun MovieDetailScreen(
         topBar = {
             MovieAppToolBar(
                 toolbarTitle = "Movie App",
-                clickedLogout = { movieScreenViewModel.LogoutUser() })
+                clickedLogout = { movieScreenViewModel.SignOutUser() })
         }
     ) { paddingValues ->
         Surface(

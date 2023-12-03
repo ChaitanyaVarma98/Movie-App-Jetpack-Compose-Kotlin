@@ -24,20 +24,6 @@ class MovieScreenViewModel : ViewModel(){
         _movieDetails.value = data
         MovieAppRouter.navigateTo(MovieAppScreen.MovieDetailScreen)
     }
-
-
-
-    fun LogoutUser() {
-        val LoginStatus = FirebaseAuth.getInstance()
-        LoginStatus.signOut()
-        val loginListener = FirebaseAuth.AuthStateListener {
-            if (it.currentUser == null) {
-                MovieAppRouter.navigateTo(MovieAppScreen.LoginScreen)
-            }
-        }
-        LoginStatus.addAuthStateListener(loginListener)
-    }
-
     fun getMovies(){
         viewModelScope.launch {
             try
@@ -53,5 +39,16 @@ class MovieScreenViewModel : ViewModel(){
 
             }
         }
+    }
+
+    fun SignOutUser() {
+        val LoginStatus = FirebaseAuth.getInstance()
+        LoginStatus.signOut()
+        val loginListener = FirebaseAuth.AuthStateListener {
+            if (it.currentUser == null) {
+                MovieAppRouter.navigateTo(MovieAppScreen.LoginScreen)
+            }
+        }
+        LoginStatus.addAuthStateListener(loginListener)
     }
 }

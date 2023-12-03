@@ -49,18 +49,13 @@ import tees.ac.uk.w9636412.movieapp.model.MovieScreenViewModel
 @Composable
 fun MovieScreen(movieScreenViewModel: MovieScreenViewModel = viewModel()) {
 
-    val scaffoldState = rememberScaffoldState()
-    val coroutineScope = rememberCoroutineScope()
-
+    val _stateScaffoled = rememberScaffoldState()
     LaunchedEffect(Unit) {
         movieScreenViewModel.getMovies()
     }
-
-
-
     Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = { MovieAppToolBar(toolbarTitle = "Movie App", clickedLogout = { movieScreenViewModel.LogoutUser()} )}
+        scaffoldState = _stateScaffoled,
+        topBar = { MovieAppToolBar(toolbarTitle = "Movie App", clickedLogout = { movieScreenViewModel.SignOutUser()} )}
     ) { paddingValues ->
         Surface(
             modifier = Modifier
