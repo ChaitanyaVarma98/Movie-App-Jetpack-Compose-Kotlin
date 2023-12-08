@@ -15,16 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import tees.ac.uk.w9636412.movieapp.R
 import tees.ac.uk.w9636412.movieapp.app.MovieAppRouter
 import tees.ac.uk.w9636412.movieapp.app.MovieAppScreen
-import tees.ac.uk.w9636412.movieapp.app.Common.ButtonComponent
-import tees.ac.uk.w9636412.movieapp.app.Common.ClickTextComponent
-import tees.ac.uk.w9636412.movieapp.app.Common.DividerTextComponent
-import tees.ac.uk.w9636412.movieapp.app.Common.HeadingTextComponent
-import tees.ac.uk.w9636412.movieapp.app.Common.PasswordTextFieldComponent
-import tees.ac.uk.w9636412.movieapp.app.Common.TextFieldComponent
 import tees.ac.uk.w9636412.movieapp.model.LoginEventTrigger
 import tees.ac.uk.w9636412.movieapp.model.LoginViewModel
 

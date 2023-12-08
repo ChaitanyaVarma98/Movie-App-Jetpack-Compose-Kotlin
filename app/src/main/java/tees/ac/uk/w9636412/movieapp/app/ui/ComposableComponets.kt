@@ -1,6 +1,5 @@
-package tees.ac.uk.w9636412.movieapp.app.Common
+package tees.ac.uk.w9636412.movieapp.app.ui
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

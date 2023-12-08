@@ -6,15 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
-import tees.ac.uk.w9636412.movieapp.app.Common.MovieRepositoryImp
-import tees.ac.uk.w9636412.movieapp.app.Common.NetworkService
+import tees.ac.uk.w9636412.movieapp.app.Services.MovieRepositoryImp
+import tees.ac.uk.w9636412.movieapp.app.Services.NetworkService
 import tees.ac.uk.w9636412.movieapp.app.MovieAppRouter
 import tees.ac.uk.w9636412.movieapp.app.MovieAppScreen
 import tees.ac.uk.w9636412.movieapp.data.Results
 
 class MovieScreenViewModel : ViewModel(){
 
-    var newsList = mutableStateOf<List<Results>>(listOf())
+    var newMovieList = mutableStateOf<List<Results>>(listOf())
+    var randomMovieList = mutableStateOf<List<Results>>(listOf())
     val newsRepository = MovieRepositoryImp(NetworkService.movieService)
 
     private val _movieDetails: MutableState<Results> = mutableStateOf(Results())
@@ -22,22 +23,12 @@ class MovieScreenViewModel : ViewModel(){
 
     fun setMovie(data:Results){
         _movieDetails.value = data
+        randomMovieList.value = getRandomMovies()
         MovieAppRouter.navigateTo(MovieAppScreen.MovieDetailScreen)
     }
     fun getMovies(){
         viewModelScope.launch {
-            try
-            {
-                val response = newsRepository.getMovies()
-                if (!response.data?.results.isNullOrEmpty())
-                {
-                    newsList.value = response.data!!.results
-                }
-                else {
-                }
-            } catch (e: Exception) {
-
-            }
+            newMovieList.value = newsRepository.getMovies().data!!.results
         }
     }
 
@@ -51,4 +42,14 @@ class MovieScreenViewModel : ViewModel(){
         }
         LoginStatus.addAuthStateListener(loginListener)
     }
+
+    fun getRandomMovies(): List<Results> {
+        // Check if newMovieList has less than 3 items
+        if (newMovieList.value.size <= 3) {
+            return newMovieList.value
+        } else {
+            return newMovieList.value.shuffled().take(3)
+        }
+    }
+
 }

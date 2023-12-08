@@ -1,6 +1,5 @@
-package tees.ac.uk.w9636412.movieapp.app.Common
+package tees.ac.uk.w9636412.movieapp.app.Services
 
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

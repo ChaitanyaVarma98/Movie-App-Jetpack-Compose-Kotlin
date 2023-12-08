@@ -12,7 +12,7 @@ sealed  class MovieAppScreen {
 
 object MovieAppRouter {
 
-    var current: MutableState<MovieAppScreen> = mutableStateOf(MovieAppScreen.LoginScreen)
+    var current: MutableState<MovieAppScreen> = mutableStateOf(MovieAppScreen.MovieScreen)
 
     fun navigateTo(destination : MovieAppScreen){
         current.value = destination

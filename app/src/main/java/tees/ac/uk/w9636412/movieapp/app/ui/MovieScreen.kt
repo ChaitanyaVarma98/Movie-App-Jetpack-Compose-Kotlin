@@ -2,7 +2,6 @@ package tees.ac.uk.w9636412.movieapp.app.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,7 +26,6 @@ import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,14 +33,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import tees.ac.uk.w9636412.movieapp.R
-import tees.ac.uk.w9636412.movieapp.app.Common.ApiService
-import tees.ac.uk.w9636412.movieapp.app.MovieAppRouter
-import tees.ac.uk.w9636412.movieapp.app.MovieAppScreen
+import tees.ac.uk.w9636412.movieapp.app.Services.ApiService
 import tees.ac.uk.w9636412.movieapp.data.Results
 import tees.ac.uk.w9636412.movieapp.model.MovieScreenViewModel
 
@@ -66,7 +61,7 @@ fun MovieScreen(movieScreenViewModel: MovieScreenViewModel = viewModel()) {
             Column(modifier = Modifier.fillMaxSize())
             {
                 LazyColumn{
-                    items(movieScreenViewModel.newsList.value){movie ->
+                    items(movieScreenViewModel.newMovieList.value){movie ->
                         MovieList(movie){
                             movieScreenViewModel.setMovie(movie)
                         }

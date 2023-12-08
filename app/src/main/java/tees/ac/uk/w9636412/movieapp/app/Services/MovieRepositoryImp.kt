@@ -1,7 +1,8 @@
-package tees.ac.uk.w9636412.movieapp.app.Common
+package tees.ac.uk.w9636412.movieapp.app.Services
 
 import android.util.Log
 import tees.ac.uk.w9636412.movieapp.data.Movies
+import tees.ac.uk.w9636412.movieapp.data.ResultStatus
 
 class MovieRepositoryImp(
     private val service: ApiService
